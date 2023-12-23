@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  nakama:
+    image: nakama
+    ports:
+      - "7350:7350" 
+  room:
+    image: room
+    ports:
+      - "7650:7650"
