@@ -9,7 +9,7 @@ services:
       - postgres:/var/lib/postgresql/data
     environment:
       - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres@logpose
+      - POSTGRES_PASSWORD=lp
       - POSTGRES_DB=logpose
   nakama:
     image: nakama
