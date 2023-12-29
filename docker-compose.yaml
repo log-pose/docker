@@ -28,7 +28,7 @@ services:
     environment:
       - DOCKER_INFLUXDB_INIT_MODE=setup
       - DOCKER_INFLUXDB_INIT_USERNAME=admin
-      - DOCKER_INFLUXDB_INIT_PASSWORD=admin@logpose
+      - DOCKER_INFLUXDB_INIT_PASSWORD=lp
       - DOCKER_INFLUXDB_INIT_ORG=logpose
       - DOCKER_INFLUXDB_INIT_BUCKET=logpose
       - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=logpose
