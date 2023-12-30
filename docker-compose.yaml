@@ -7,14 +7,35 @@ services:
       - "5432:5432"
     volumes:
       - postgres:/var/lib/postgresql/data
+    env_file:
+      - .env
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=lp
-      - POSTGRES_DB=logpose
+      - POSTGRES_USER=${PSQL_USER}
+      - POSTGRES_PASSWORD=${PSQL_PASSWORD}
+      - POSTGRES_DB=postgres
+    healthcheck:
+      test:
+        ["CMD", "pg_isready", "-U", "postgres", "-d", "postgres"]
+      interval: 5s
+      timeout: 10s
+      retries: 5
   nakama:
     image: nakama
     ports:
       - "7350:7350"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+    environment:
+      - PSQL_USER=${PSQL_USER}
+      - PSQL_PASSWORD=${PSQL_PASSWORD}
+      - PSQL_DB=${PSQL_DATABASE}
+      - PSQL_HOST=postgres
+      - PSQL_PORT=${PSQL_PORT}
+      - NAKAMA_NAME=${NAKAMA_NAME}
+      - NAKAMA_PORT=${NAKAMA_PORT}
+      - JWT_SECRET=${JWT_SECRET}
   room:
     image: room
     ports:
